@@ -24,7 +24,7 @@ sudo mv cheat-linux-amd64 /usr/local/bin/cheat # 更换目录并改名
 cheat -v # 查看cheat命令
 
 #国内用户加速下载地址
-wget -c https://github.wuyanzheshui.workers.dev/cheat/cheat/releases/download/4.0.2/cheat-linux-amd64.gz 
+wget -c https://github.wuyanzheshui.workers.dev/cheat/cheat/releases/download/4.0.0/cheat-linux-amd64.gz 
 ```
 
 ![20200803172539_fdb93bb650e16e8f312bd84ca83b213b.png](https://images-1255533533.cos.ap-shanghai.myqcloud.com/20200803172539_fdb93bb650e16e8f312bd84ca83b213b.png)
@@ -40,7 +40,9 @@ wget -c https://github.wuyanzheshui.workers.dev/cheat/cheat/releases/download/4.
 这里我给cheat的环境变量是/usr/local/bin/cheat ，有些系统里没有这个路径，所以你需要将以下内容添加到你的配置里。
 
 ```shell
-export PATH=$HOME/bin:$HOME/usr/local/bin:/sbin:/usr/sbin:$PATH
+export PATH=$PATH:/usr/local/bin:
+echo 'export PATH=$PATH:/usr/local/bin:'>>~/.zshrc #直接写入配置文件
+source ~/.zshrc
 ```
 将以上内容添加到你的配置里。
 * `~/.zshrc`
@@ -52,6 +54,10 @@ source ~/.zshrc
 
 
 ## cheat 配置
+配置文件默认存放位置：
+```shell
+~/.config/cheat/conf.yml
+```
 
 ### 自动安装
 
@@ -73,8 +79,8 @@ mkdir -p ~/.dotfiles/cheat/cheatsheets && cd ~/.dotfiles/cheat/cheatsheets
 git clone https://github.com/cheat/cheatsheets community #需要这个cheatsheets的配合，才能正常使用
 # git clone https://gitee.com/solider245/cheatsheets community #国内用户请用这个地址替代
 mkdir -p ~/.dotfiles/cheat/cheatsheets/work
-mkdir -p ~/.dotfiles/cheat/cheatsheets/personal
-
+mkdir -p ~/.dotfiles/cheat/cheatsheets/personal # 必须创建这两个文件夹，否则会报错
+# 配置文件的两个地址也必须和你写入的地址一样
 ```
 
 为什么要这么做呢？原因是：第一步下载下来的cheat二进制文件，并没有包含cheat提示的具体内容，每个命令的具体内容例子，是在一个专门的目录里面，一个命令就是一个普通的plain 文件，所有的cheat单，也放在这个git仓库：[https://github.com/cheat/cheatsheets](https://github.com/cheat/cheatsheets)，如果以后这个仓库有更新，可以
